@@ -6,7 +6,8 @@ for virtual machine and how it works, in the
 [second section](#compiled-language) we describe the language's grammar.
 
 Code for compiling the language and for interpreting compiled machine code is in
-[](compiler.c) and [](interpreter.c) files respectively.
+[compiler](src/compiler.c) and [interpreter](src/interpreter.c) files
+respectively.
 
 The compiler's output is a text recording of the code for the virtual machine.
 Each instruction is on a separate line, if an instruction has arguments they are
