@@ -80,6 +80,7 @@ In the program, in addition to the characters representing the end symbols of
 the grammar, the following separators can occur anywhere:
 - spaces, tabs, endlines,
 - comments from `;` to the end of the line.
+
 They do not affect the interpretation of a program.
 
 A program consists of a string of named procedures and an anonymous main
