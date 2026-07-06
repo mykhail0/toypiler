@@ -26,21 +26,21 @@ The machine recognizes ten types of instructions, with codes from 0 to 9:
 
 0. `PUSH_0 stack` - push bit 0 on stack with the number `stack`,
 1. `PUSH_1 stack` - push bit 1 on stack with the number `stack`,
-2. `OUTPUT_0` - Output bit 0,
-3. `OUTPUT_1` - Output bit 1,
-4. `POP_BRANCH address stack` - Pop a bit from the stack with the number
+2. `OUTPUT_0` - output bit 0,
+3. `OUTPUT_1` - output bit 1,
+4. `POP_BRANCH address stack` - pop a bit from the stack with the number
 `stack`, if the bit has value 0 then go to the instruction at the address of
 `address`, otherwise go to the next instruction,
-5. `INPUT_BRANCH address` - Read a bit from the input, if the bit has value 0
+5. `INPUT_BRANCH address` - read a bit from the input, if the bit has value 0
 then go to the instruction at the address of `address`, otherwise go to the next
 instruction,
 6. `JUMP address` - go to the instruction at the address of `address`,
 7. `CALL address` - push the address of the next instruction after this `CALL`
 instruction, on the return stack and go to the instruction at the address of
 `address`,
-8. `RETURN` - Pop an address from the return stack and go to the instruction at
+8. `RETURN` - pop an address from the return stack and go to the instruction at
 that address,
-9. `HALT` - Halt the machine.
+9. `HALT` - halt the machine.
 
 Instruction `INPUT_BRANCH` reads bits of input characters in order of the most
 significant bits. When the end of data is reached, it reads eight consecutive
