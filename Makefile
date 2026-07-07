@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -std=c11 -pedantic -Wall -Wextra -Werror -fstack-protector-strong -g
 
-.PHONY: all clean # test
+.PHONY: all clean
 
 SRCDIR = src
 BUILDDIR = build
