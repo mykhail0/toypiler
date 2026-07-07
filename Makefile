@@ -9,25 +9,20 @@ BINARIES = $(BUILDDIR)/compile $(BUILDDIR)/interpret
 
 all: $(BINARIES)
 
-build/compile: $(SRCDIR)/compiler.c $(BUILDDIR)/common.o
+$(BUILDDIR)/compile: $(SRCDIR)/compiler.c $(BUILDDIR)/common.o
 	$(CC) $(CFLAGS) -c $< -o $(BUILDDIR)/compile.o
 	$(CC) -o $@ $(BUILDDIR)/compile.o $(BUILDDIR)/common.o
 
-build/interpret: $(SRCDIR)/interpreter.c $(BUILDDIR)/common.o
+$(BUILDDIR)/interpret: $(SRCDIR)/interpreter.c $(BUILDDIR)/common.o
 	$(CC) $(CFLAGS) -c $< -o $(BUILDDIR)/interpret.o
 	$(CC) -o $@ $(BUILDDIR)/interpret.o $(BUILDDIR)/common.o
 
-build/common.o: src/common.c src/common.h build
+$(BUILDDIR)/common.o: src/common.c src/common.h
+	mkdir -p $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $(BUILDDIR)/common.o
 
-build/test_executable: cube.c bin
-	$(CC) $(CFLAGS) $< -o $@
-
-build:
-	mkdir -p build
-
 clean:
-	if [ -d "build" ]; then rm build/*.o; fi
+	find $(BUILDDIR) -name "*.o" -delete
 	find tests -name "*.myout" -delete
 
 test: $(BINARIES) test.sh tests

@@ -1,5 +1,2 @@
-build/*
+build
 README.html
-# build/*.o
-# build/interpret
-# build/compile
