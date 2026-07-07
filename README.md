@@ -17,7 +17,12 @@ is detected, it reports an assertion violation. The compiler assumes the
 correctness of the language. If an error is detected it prints an error message
 to stderr and exits with an error exit code.
 
+A [Makefile](Makefile) is supplied, running `make` produces `build/compile` and
+`build/interpret` binaries. Both operate on standard input and standard output,
+there's no support for files as command line arguments.
+
 ## Virtual machine
+
 Virtual machine code instructions have non-negative integer addresses. VM's data
 is stored on stacks with pop and push operations. VM has stacks of bits,
 numbered with non-negative integers. VM also has a stack of instructions'
@@ -54,22 +59,23 @@ executed, unless the instruction specified otherwise. If the instruction the
 machine were to go to does not exist, then the code has an error.
 
 ## Compiled language
+
 The syntax of the language is described by a grammar with an initial symbol
 `Program`:
 
-```
+```text
 Program → ProcedureSequence MainProcedure
 MainProcedure → Body
 ProcedureSequence → ε | Procedure ProcedureSequence
 Procedure → Name Body
-Name → A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+Name → A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z <!-- rumdl-disable-line MD013 -->
 Body → { StatementSequence }
 StatementSequence → ε | Statement StatementSequence
 Statement → Call | Write | Choice
 Call → Name
 Write → Destination BitSequence
 Destination → StackName | Special
-StackName → a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
+StackName → a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z <!-- rumdl-disable-line MD013 -->
 Special → $
 BitSequence → Bit BitSequence | Bit
 Bit → - | +
@@ -79,6 +85,7 @@ Source → StackName | Special
 
 In the program, in addition to the characters representing the end symbols of
 the grammar, the following separators can occur anywhere:
+
 - spaces, tabs, endlines,
 - comments from `;` to the end of the line.
 
@@ -91,14 +98,17 @@ begins with the main procedure. The content of a procedure is a string of
 statements.
 
 There are three types of statements:
-1. Call - Executes a procedure. After it is finished, the program return to the address of call.
-2. Write - Pushes a non-empty string of bits on a stack with the given name. If the stack's
-name is special (`$`) then writes the string to output. Bits of 0 and 1 are
-represented by characters `-` and `+` respectively. The bits are written to a
-stack or to output in order of occurrence in the sequence from left to right.
-3. Choice - Performs one of two statements depending on the value of the bit. If the name of
-the stack is given, chooses based on the value of the bit popped from that
-stack. If instead of the name of the stack a special name is given (`$`), make
-the choice based on a bit loaded from the input. If the bit has a value 1, the
-first of the given statements is executed, otherwise the second statement is
-executed.
+
+1. Call - Executes a procedure. After it is finished, the program return to the
+address of call.
+2. Write - Pushes a non-empty string of bits on a stack with the given name. If
+the stack's name is special (`$`) then writes the string to output. Bits of 0
+and 1 are represented by characters `-` and `+` respectively. The bits are
+written to a stack or to output in order of occurrence in the sequence from left
+to right.
+3. Choice - Performs one of two statements depending on the value of the bit. If
+the name of the stack is given, chooses based on the value of the bit popped
+from that stack. If instead of the name of the stack a special name is given
+(`$`), make the choice based on a bit loaded from the input. If the bit has a
+value 1, the first of the given statements is executed, otherwise the second
+statement is executed.
