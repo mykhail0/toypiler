@@ -17,9 +17,12 @@ is detected, it reports an assertion violation. The compiler assumes the
 correctness of the language. If an error is detected it prints an error message
 to stderr and exits with an error exit code.
 
-A [Makefile](Makefile) is supplied, running `make` produces `build/compile` and
-`build/interpret` binaries. Both operate on standard input and standard output,
-there's no support for files as command line arguments.
+Project works for a Linux system with a working gcc compiler, to run tests you
+should have [valgrind](https://valgrind.org/). A [Makefile](Makefile) with a
+default compilation command is supplied. It also has phony targets clean and
+test. Running `make` produces `build/compile` and `build/interpret` binaries.
+Both operate on standard input and standard output, there's no support for files
+as command line arguments.
 
 ## Virtual machine
 
