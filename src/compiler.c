@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -19,6 +20,7 @@ void reallocate(instruction** instruction, int* n, int address) {
   if (*n == address) {
     *n = more(*n);
     *instruction = realloc(*instruction, (*n) * sizeof **instruction);
+    assert(*instruction != NULL);
   }
 }
 
@@ -29,6 +31,7 @@ void realloc_darr(darr* arr) {
   if (arr->size == arr->calls_num) {
     arr->size = more(arr->size);
     arr->calls = realloc(arr->calls, (arr->size) * sizeof *(arr->calls));
+    assert(arr->calls != NULL);
   }
 }
 
@@ -213,6 +216,7 @@ int main() {
 
   instruction* instructions;
   instructions = malloc(n * sizeof *instructions);
+  assert(instructions != NULL);
   instructions[0].a = JUMP;
 
   // Initialize array of addresses, where each procedure starts.
@@ -229,6 +233,7 @@ int main() {
     procedure_calls[i].size = n;
     procedure_calls[i].calls = (int*)malloc(
         procedure_calls[i].size * sizeof(*(procedure_calls[i].calls)));
+    assert(procedure_calls[i].calls != NULL);
   }
 
   // Generate code for every procedure into `instructions`.
