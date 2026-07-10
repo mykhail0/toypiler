@@ -19,7 +19,7 @@ $(BUILDDIR)/interpret: $(SRCDIR)/interpreter.c $(BUILDDIR)/common.o
 
 $(BUILDDIR)/common.o: src/common.c src/common.h
 	mkdir -p $(BUILDDIR)
-	$(CC) $(CFLAGS) -c $< -o $(BUILDDIR)/common.o
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	find $(BUILDDIR) -name "*.o" -delete
