@@ -9,6 +9,12 @@ Code for compiling the language and for interpreting compiled machine code is in
 [compiler](src/compiler.c) and [interpreter](src/interpreter.c) files
 respectively.
 
+## Demo
+
+![demo](assets/demo.gif)
+
+## Introduction
+
 The compiler's output is a text recording of the code for the virtual machine.
 Each instruction is on a separate line, if an instruction has arguments they are
 separated by spaces. There should be one `HALT` command at the end of a machine
